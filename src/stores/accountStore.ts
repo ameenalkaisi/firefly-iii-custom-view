@@ -36,7 +36,7 @@ export const makeAccountStore = (inputValues: Partial<AccountValues>) => {
   return createWithEqualityFn<AccountStore>(
     accountStoreStateCreator(inputValues),
     shallow,
-  ).getState();
+  );
 };
 
-export type UseAccountStore = StoreApi<AccountValues>;
+export type UseAccountStore = ReturnType<typeof makeAccountStore>;

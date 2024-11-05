@@ -1,14 +1,15 @@
 "use client";
 
+import { useAccountStore } from "@/hooks/useAccountStore";
 import { AccountStoreProvider } from "@/providers/AccountStoreProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 
 export default function Home() {
-  // TODO: fetching from firefly -- setup services etc
-  // TODO: setup graph
-  // TODO: setup clicks inside of graph(?) -- more details of transaction list maybe
   const [queryClient] = useState(() => new QueryClient());
+  const data = useAccountStore((state) => state.transactions);
+
+  console.log("DATA", data);
 
   return (
     <QueryClientProvider client={queryClient}>
