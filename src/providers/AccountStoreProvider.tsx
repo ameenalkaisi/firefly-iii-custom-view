@@ -1,10 +1,13 @@
 import { config } from "@/constants/config";
 import { client } from "@/lib/axios";
-import { makeAccountStore, UseAccountStore } from "@/stores/accountStore";
+import { AccountStore, makeAccountStore } from "@/stores/accountStore";
 import { useQuery } from "@tanstack/react-query";
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
+import { StoreApi } from "zustand";
 
-export const AccountStoreContext = createContext<null | UseAccountStore>(null);
+export const AccountStoreContext = createContext<StoreApi<AccountStore> | null>(
+  null,
+);
 
 export const AccountStoreProvider = ({ children }: PropsWithChildren) => {
   const { isPending, error, data } = useQuery({
@@ -16,9 +19,7 @@ export const AccountStoreProvider = ({ children }: PropsWithChildren) => {
     },
   });
 
-  const [accountStore, setAccountStore] = useState<UseAccountStore | null>(
-    null,
-  );
+  const [accountStore, setAccountStore] = useState<StoreApi<AccountStore>>();
 
   useEffect(() => {
     if (!data) return;

@@ -1,12 +1,17 @@
 import { AccountStoreContext } from "@/providers/AccountStoreProvider";
-import { UseAccountStore } from "@/stores/accountStore";
+import { AccountStore } from "@/stores/accountStore";
 import { useContext } from "react";
+import { StoreApi, UseBoundStore, useStore } from "zustand";
+import { shallow } from "zustand/shallow";
+import { useStoreWithEqualityFn } from "zustand/traditional";
 
-export function useAccountStore(selector: Parameters<UseAccountStore>[0]) {
+export function useAccountStore(
+  selector: Parameters<UseBoundStore<StoreApi<AccountStore>>>[0],
+) {
   const accountStore = useContext(AccountStoreContext);
   if (!accountStore) {
     throw new Error("Missing AccountStoreProvider");
   }
 
-  return accountStore(selector);
+  return useStoreWithEqualityFn(accountStore, selector, shallow);
 }

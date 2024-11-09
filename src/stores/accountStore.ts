@@ -1,7 +1,5 @@
 import { Transaction } from "@/types/domain";
-import { StateCreator, StoreApi } from "zustand";
-import { createWithEqualityFn } from "zustand/traditional";
-import { shallow } from "zustand/vanilla/shallow";
+import { createStore, StateCreator } from "zustand";
 
 export interface AccountValues {
   transactions: Transaction[];
@@ -27,16 +25,12 @@ export const DEFAULT_VALUES: AccountValues = {
 const accountStoreStateCreator =
   (inputs: Partial<AccountValues>): AccountStoreStateCreator =>
   (set) => ({
-    ...inputs,
     ...DEFAULT_VALUES,
+    ...inputs,
     updateTransactions: (newStuff) => set({ transactions: newStuff }),
   });
 
 export const makeAccountStore = (inputValues: Partial<AccountValues>) => {
-  return createWithEqualityFn<AccountStore>(
-    accountStoreStateCreator(inputValues),
-    shallow,
-  );
+  console.log(inputValues);
+  return createStore<AccountStore>(accountStoreStateCreator(inputValues));
 };
-
-export type UseAccountStore = ReturnType<typeof makeAccountStore>;
