@@ -1,7 +1,7 @@
 import { AccountStoreContext } from "@/providers/AccountStoreProvider";
 import { AccountStore } from "@/stores/accountStore";
 import { useContext } from "react";
-import { StoreApi, UseBoundStore, useStore } from "zustand";
+import { StoreApi, UseBoundStore } from "zustand";
 import { shallow } from "zustand/shallow";
 import { useStoreWithEqualityFn } from "zustand/traditional";
 

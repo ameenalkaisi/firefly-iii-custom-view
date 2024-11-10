@@ -24,7 +24,7 @@ export const AccountStoreProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     if (!data) return;
 
-    const accountStore = makeAccountStore({ transactions: data });
+    const accountStore = makeAccountStore({ transactions: getTransactionsFromResponse(data) });
 
     setAccountStore(accountStore);
   }, [data]);

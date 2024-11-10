@@ -31,6 +31,5 @@ const accountStoreStateCreator =
   });
 
 export const makeAccountStore = (inputValues: Partial<AccountValues>) => {
-  console.log(inputValues);
   return createStore<AccountStore>(accountStoreStateCreator(inputValues));
 };
