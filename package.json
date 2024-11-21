@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "firefly:api:codegen": "cross-env openapi-typescript https://api-docs.firefly-iii.org/firefly-iii-6.1.22-v1.yaml --output ./src/types/firefly_api.ts",
+    "postinstall": "npm run firefly:api:codegen"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.59.16",
@@ -23,10 +25,12 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "15.0.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
+    "openapi-typescript": "^7.4.3",
     "postcss": "^8",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.1",
