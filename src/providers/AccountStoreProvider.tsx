@@ -1,6 +1,8 @@
 import { config } from "@/constants/config";
 import { client } from "@/lib/axios";
 import { AccountStore, makeAccountStore } from "@/stores/accountStore";
+import { components } from "@/types/firefly-api";
+import { getTransactionsFromResponse } from "@/utils/firefly-api/parsers";
 import { useQuery } from "@tanstack/react-query";
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import { StoreApi } from "zustand";
@@ -12,11 +14,8 @@ export const AccountStoreContext = createContext<StoreApi<AccountStore> | null>(
 export const AccountStoreProvider = ({ children }: PropsWithChildren) => {
   const { isPending, error, data } = useQuery({
     queryKey: ["account-transactions"],
-    queryFn: () => {
-      return client
-        .get<any>(config.FIREFLY_API_URL + "/transactions")
-        .then((res) => res.data);
-    },
+    queryFn: async () =>
+      client.get<components["schemas"]["TransactionArray"]>(config.FIREFLY_API_URL + "/transactions"),
   });
 
   const [accountStore, setAccountStore] = useState<StoreApi<AccountStore>>();
@@ -24,7 +23,9 @@ export const AccountStoreProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     if (!data) return;
 
-    const accountStore = makeAccountStore({ transactions: getTransactionsFromResponse(data) });
+    const accountStore = makeAccountStore({
+      transactions: getTransactionsFromResponse(data.data),
+    });
 
     setAccountStore(accountStore);
   }, [data]);

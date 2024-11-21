@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "firefly:api:codegen": "cross-env openapi-typescript https://api-docs.firefly-iii.org/firefly-iii-6.1.22-v1.yaml --output ./src/types/firefly_api.ts",
+    "firefly:api:codegen": "cross-env openapi-typescript https://api-docs.firefly-iii.org/firefly-iii-6.1.22-v1.yaml --output ./src/types/firefly-api.ts",
     "postinstall": "npm run firefly:api:codegen"
   },
   "dependencies": {
