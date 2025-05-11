@@ -4641,7 +4641,7 @@ export interface components {
              * @default 0
              * @example 5.3
              */
-            interest: string;
+            interest: string | null;
             interest_period?: components["schemas"]["InterestPeriodProperty"];
             /**
              * Format: string

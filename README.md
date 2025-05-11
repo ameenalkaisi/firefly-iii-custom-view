@@ -1,3 +1,6 @@
+## RE: Firefly API
+The URL to the schema is https://api-docs.firefly-iii.org/firefly-iii-6.2.10-v1.yaml
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
